@@ -1,0 +1,62 @@
+# Database Migration Configuration Example
+# Copy this file to config.yml and update with your credentials
+# WARNING: config.yml contains sensitive credentials - do not commit to version control!
+
+# SQL Server (Source Database) Configuration
+sql_server:
+  server: 'your-sql-server-host'
+  port: 1433
+  database: 'YourDatabase'
+  username: 'your-username'
+  password: 'your-password'
+  driver: 'ODBC Driver 18 for SQL Server'
+  schema: 'dbo'
+  
+  # Connection settings
+  connection:
+    timeout: 300
+    trust_server_certificate: true
+    login_timeout: 30
+    connect_retry_count: 3
+    connect_retry_interval: 10
+
+# PostgreSQL (Target Database) Configuration  
+postgresql:
+  host: 'localhost'
+  port: 5432
+  database: 'your_target_database'
+  username: 'your-pg-username'
+  password: 'your-pg-password'
+  schema: 'your_target_schema'
+
+# Migration Settings
+migration:
+  # Default batch sizes (can be overridden by learning system)
+  default_chunk_size: 10000
+  default_sub_batch_size: 1000
+  
+  # Progress settings
+  progress_save_interval: 10000  # Save progress every N rows
+  preserve_temp_table_threshold: 1000  # Preserve temp table if more than N rows processed
+  
+  # Performance settings
+  max_threads: 3
+  connection_pool_size: 5
+  
+  # Retry settings
+  max_retries: 3
+  retry_delay: 5  # seconds
+
+# Logging Configuration
+logging:
+  level: 'INFO'  # DEBUG, INFO, WARNING, ERROR
+  format: '%(asctime)s  [%(levelname)s] %(thread_name)s: %(message)s'
+  date_format: '%H:%M:%S'
+
+# Table-specific overrides (optional)
+table_overrides:
+  # Example: Override settings for specific tables
+  # Order:
+  #   chunk_size: 5000
+  #   sub_batch_size: 400
+  #   notes: "Large table with geography columns"
